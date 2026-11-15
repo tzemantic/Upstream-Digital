@@ -1,0 +1,21 @@
+# Netlify settings: publishes the static site in site/ (no build step).
+[build]
+  publish = "site"
+
+# Old Wix addresses -> new ones (301 keeps search rankings)
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy/"
+  status = 301
+
+[[redirects]]
+  from = "/pages-sitemap.xml"
+  to = "/sitemap.xml"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
