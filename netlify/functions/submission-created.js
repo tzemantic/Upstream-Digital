@@ -30,13 +30,13 @@ function validEmail(raw) {
 }
 
 function buildEmail(name) {
-  const hi = name ? `Hi ${name},` : "Hi there,";
+  const hi = name ? `Hi ${name}, thanks for reaching out!` : "Hi there, thanks for reaching out!";
   const text = [
     hi,
     "",
-    "Thanks for reaching out to Upstream Digital. We've received your message and will be in touch as soon as possible.",
+    "We've received your message and will be in touch as soon as possible.",
     "",
-    `If it's time-sensitive, you're welcome to call us at ${PHONE}.`,
+    `If it's time-sensitive, you're welcome to give us a call at ${PHONE}.`,
     "",
     "Talk soon,",
     "The Upstream Digital team",
@@ -50,16 +50,18 @@ function buildEmail(name) {
 // Table layout and inline styles so it renders in Outlook, Gmail and Apple Mail.
 function brandedHtml(name) {
   const ABYSS = "#070D1C", NAVY = "#1D2F4F", BRAND = "#6D94FF", SKY = "#99B9FF", FOAM = "#EEF3FF", MUTED = "#4A5D82";
-  const FONT = "Montserrat,'Segoe UI',Arial,Helvetica,sans-serif";
+  // Same font stacks as the website (--display / --body). Mail apps that can't load web fonts fall back to these.
+  const FONT = "Montserrat,'Helvetica Neue',Arial,sans-serif";
   const LOGO = "https://www.getupstreamdigital.com/assets/email-logo.png";
-  const headline = name ? `Thanks for reaching out, ${name}.` : "Thanks for reaching out.";
+  // Non-breaking space keeps "reaching out!" together when the headline wraps
+  const headline = (name ? `Hi ${name}, thanks for` : "Hi there, thanks for") + " reaching&nbsp;out!";
   const preheader = "We've received your message and will be in touch as soon as possible.";
   return `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light only">
 <title>Thanks for reaching out to Upstream Digital</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   body{margin:0;padding:0;background:${FOAM}}
   a{color:${BRAND}}
@@ -76,16 +78,16 @@ function brandedHtml(name) {
 <tr><td align="center" style="padding:32px 12px">
   <table role="presentation" class="card" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background:#ffffff;border-radius:20px;overflow:hidden">
     <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:28px 40px 26px">
-      <img src="${LOGO}" width="180" height="26" alt="Upstream Digital" style="display:block;border:0;width:180px;height:auto;color:#ffffff;font:800 20px ${FONT}">
+      <img src="${LOGO}" width="180" height="26" alt="Upstream Digital" style="display:block;border:0;width:180px;height:auto;color:#ffffff;font:700 20px ${FONT}">
     </td></tr>
     <tr><td bgcolor="${BRAND}" style="height:4px;line-height:4px;font-size:0;background:${BRAND};background-image:linear-gradient(90deg,${NAVY},${BRAND} 55%,${SKY})">&nbsp;</td></tr>
     <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:36px 40px 40px">
-      <p style="margin:0 0 14px;font:700 12px/1.2 ${FONT};letter-spacing:.14em;text-transform:uppercase;color:${SKY}">Message received</p>
-      <h1 class="h1" style="margin:0 0 14px;font:800 30px/1.15 ${FONT};letter-spacing:-.02em;color:#ffffff">${headline}</h1>
-      <p style="margin:0;font:400 16px/1.6 ${FONT};color:${FOAM}">We've received your message and will be in touch as soon as possible.</p>
+      <p style="margin:0 0 16px;font:700 13px/1.2 ${FONT};letter-spacing:.14em;text-transform:uppercase;color:${SKY}"><span style="display:inline-block;width:28px;height:2px;margin:0 12px 0 0;vertical-align:middle;background:${BRAND};border-radius:2px"></span>Message received</p>
+      <h1 class="h1" style="margin:0 0 14px;font:700 32px/1.1 ${FONT};letter-spacing:-.025em;color:#ffffff">${headline}</h1>
+      <p style="margin:0;font:400 17px/1.6 ${FONT};color:${FOAM}">We've received your message and will be in touch as soon as possible.</p>
     </td></tr>
     <tr><td class="pad" style="padding:36px 40px 12px">
-      <p style="margin:0 0 20px;font:400 16px/1.6 ${FONT};color:${NAVY}">If it's time-sensitive, you're welcome to give us a call.</p>
+      <p style="margin:0 0 20px;font:400 17px/1.6 ${FONT};color:${NAVY}">If it's time-sensitive, you're welcome to give us a call.</p>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
         <td bgcolor="${BRAND}" style="border-radius:300px;background:${BRAND}">
           <a href="tel:+18604506983" style="display:inline-block;padding:14px 28px;font:600 16px/1 ${FONT};color:${ABYSS};text-decoration:none;border-radius:300px;white-space:nowrap">Call ${PHONE}</a>
@@ -93,7 +95,7 @@ function brandedHtml(name) {
       </tr></table>
     </td></tr>
     <tr><td class="pad" style="padding:28px 40px 40px">
-      <p style="margin:0;font:400 16px/1.6 ${FONT};color:${NAVY}">Talk soon,<br><strong style="font-weight:700">The Upstream Digital team</strong></p>
+      <p style="margin:0;font:400 17px/1.6 ${FONT};color:${NAVY}">Talk soon,<br><strong style="font-weight:700">The Upstream Digital team</strong></p>
     </td></tr>
     <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:24px 40px">
       <p style="margin:0 0 6px;font:600 14px/1.5 ${FONT};color:#ffffff">Upstream Digital <span style="color:${SKY};font-weight:400">&nbsp;Greenwich, CT</span></p>

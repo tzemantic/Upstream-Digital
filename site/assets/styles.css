@@ -386,6 +386,9 @@ html{scroll-padding-top:0}
 
 /* Sub pages */
 .page-hero .title{background:linear-gradient(100deg,#fff 0%,var(--foam) 45%,var(--sky) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* Gradient text is painted only inside the element's box, so give letters like g, p and y room below the line (negative margin keeps the layout unchanged) */
+.page-hero .title,.foot-cta-text{padding-bottom:.15em;margin-bottom:-.15em}
+.hero h1 .up{padding-bottom:.16em;margin-bottom:-.08em}
 .cs-quote{box-shadow:0 40px 80px -40px rgba(29,47,79,.6)}
 
 
