@@ -41,13 +41,69 @@ function buildEmail(name) {
     "Talk soon,",
     "The Upstream Digital team",
   ].join("\n");
-  const html = `<!doctype html><html><body style="margin:0;padding:24px;background:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#1D2F4F">
-<p style="margin:0 0 16px">${hi}</p>
-<p style="margin:0 0 16px">Thanks for reaching out to Upstream Digital. We've received your message and will be in touch as soon as possible.</p>
-<p style="margin:0 0 16px">If it's time-sensitive, you're welcome to call us at ${PHONE}.</p>
-<p style="margin:0">Talk soon,<br>The Upstream Digital team</p>
-</body></html>`;
+  const html = brandedHtml(name);
   return { subject: "Thanks for reaching out to Upstream Digital", text, html };
+}
+
+// Branded HTML version, matching the website: abyss header with the logo, a brand-blue
+// "current" line, foam background, Montserrat where the mail app supports web fonts.
+// Table layout and inline styles so it renders in Outlook, Gmail and Apple Mail.
+function brandedHtml(name) {
+  const ABYSS = "#070D1C", NAVY = "#1D2F4F", BRAND = "#6D94FF", SKY = "#99B9FF", FOAM = "#EEF3FF", MUTED = "#4A5D82";
+  const FONT = "Montserrat,'Segoe UI',Arial,Helvetica,sans-serif";
+  const LOGO = "https://www.getupstreamdigital.com/assets/email-logo.png";
+  const headline = name ? `Thanks for reaching out, ${name}.` : "Thanks for reaching out.";
+  const preheader = "We've received your message and will be in touch as soon as possible.";
+  return `<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light only">
+<title>Thanks for reaching out to Upstream Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;padding:0;background:${FOAM}}
+  a{color:${BRAND}}
+  @media (max-width:620px){
+    .card{width:100%!important;border-radius:0!important}
+    .pad{padding-left:24px!important;padding-right:24px!important}
+    .h1{font-size:26px!important}
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:${FOAM}">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:${FOAM}">${preheader}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${FOAM}">
+<tr><td align="center" style="padding:32px 12px">
+  <table role="presentation" class="card" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background:#ffffff;border-radius:20px;overflow:hidden">
+    <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:28px 40px 26px">
+      <img src="${LOGO}" width="180" height="26" alt="Upstream Digital" style="display:block;border:0;width:180px;height:auto;color:#ffffff;font:800 20px ${FONT}">
+    </td></tr>
+    <tr><td bgcolor="${BRAND}" style="height:4px;line-height:4px;font-size:0;background:${BRAND};background-image:linear-gradient(90deg,${NAVY},${BRAND} 55%,${SKY})">&nbsp;</td></tr>
+    <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:36px 40px 40px">
+      <p style="margin:0 0 14px;font:700 12px/1.2 ${FONT};letter-spacing:.14em;text-transform:uppercase;color:${SKY}">Message received</p>
+      <h1 class="h1" style="margin:0 0 14px;font:800 30px/1.15 ${FONT};letter-spacing:-.02em;color:#ffffff">${headline}</h1>
+      <p style="margin:0;font:400 16px/1.6 ${FONT};color:${FOAM}">We've received your message and will be in touch as soon as possible.</p>
+    </td></tr>
+    <tr><td class="pad" style="padding:36px 40px 12px">
+      <p style="margin:0 0 20px;font:400 16px/1.6 ${FONT};color:${NAVY}">If it's time-sensitive, you're welcome to give us a call.</p>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+        <td bgcolor="${BRAND}" style="border-radius:300px;background:${BRAND}">
+          <a href="tel:+18604506983" style="display:inline-block;padding:14px 28px;font:600 16px/1 ${FONT};color:${ABYSS};text-decoration:none;border-radius:300px;white-space:nowrap">Call ${PHONE}</a>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td class="pad" style="padding:28px 40px 40px">
+      <p style="margin:0;font:400 16px/1.6 ${FONT};color:${NAVY}">Talk soon,<br><strong style="font-weight:700">The Upstream Digital team</strong></p>
+    </td></tr>
+    <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:24px 40px">
+      <p style="margin:0 0 6px;font:600 14px/1.5 ${FONT};color:#ffffff">Upstream Digital <span style="color:${SKY};font-weight:400">&nbsp;Greenwich, CT</span></p>
+      <p style="margin:0;font:400 13px/1.5 ${FONT};color:${SKY}"><a href="https://www.getupstreamdigital.com" style="color:${SKY};text-decoration:underline">getupstreamdigital.com</a></p>
+    </td></tr>
+  </table>
+  <p style="margin:18px 0 0;font:400 12px/1.5 ${FONT};color:${MUTED}">You're receiving this because you contacted us through our website.</p>
+</td></tr>
+</table>
+</body></html>`;
 }
 
 async function handler(event) {
@@ -92,4 +148,4 @@ async function handler(event) {
   return { statusCode: 200, body: "Auto-reply sent" };
 }
 
-module.exports = { handler, greetingName, validEmail, buildEmail };
+module.exports = { handler, greetingName, validEmail, buildEmail, brandedHtml };

@@ -162,7 +162,7 @@
     if(!endpoint){status.textContent='This form isn’t connected to an inbox yet. Call +1 (860) 450-6983 or email info@getupstreamdigital.com.';return}
     status.textContent='Sending…';
     fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
-      .then(function(r){if(!r.ok)throw 0;form.reset();status.textContent='Message sent. We’ll be in touch shortly.'})
+      .then(function(r){if(!r.ok)throw 0;form.reset();status.textContent='Message sent. We’ll be in touch shortly.';if(window.gtag)gtag('event','generate_lead',{form_name:'contact'})})
       .catch(function(){status.textContent='The message didn’t send. Call or email us instead.'});
   });
 

@@ -11,7 +11,7 @@ SITE = sys.argv[1]
 DOMAIN = "https://www.getupstreamdigital.com"
 OG_IMG = DOMAIN + "/assets/about.webp"
 TODAY = "2026-11-13"
-ASSET_V = "20261115d"  # bump when styles.css or main.js change so browsers fetch fresh copies
+ASSET_V = "20261115e"  # bump when styles.css or main.js change so browsers fetch fresh copies
 
 def esc(s): return html.escape(s, quote=True)
 
@@ -134,6 +134,8 @@ window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)
 gtag('consent','default',{{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',wait_for_update:500}});
 try{{var c=JSON.parse(localStorage.getItem('ud_consent_v1'));if(c){{var g=function(v){{return v?'granted':'denied'}};gtag('consent','update',{{functionality_storage:g(c.functional),personalization_storage:g(c.functional),analytics_storage:g(c.analytics),ad_storage:g(c.marketing),ad_user_data:g(c.marketing),ad_personalization:g(c.marketing)}})}}}}catch(e){{}}
 </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MLT40PPDV1"></script>
+<script>gtag('js',new Date());gtag('config','G-MLT40PPDV1');</script>
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{url}">
