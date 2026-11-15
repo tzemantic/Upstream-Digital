@@ -59,26 +59,35 @@ function brandedHtml(name) {
   return `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
 <meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light only">
+<!--[if mso]><style>body,table,td,p,a,h1,span,strong{font-family:Arial,Helvetica,sans-serif!important}</style><![endif]-->
 <title>Thanks for reaching out to Upstream Digital</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   body{margin:0;padding:0;background:${FOAM}}
   a{color:${BRAND}}
   @media (max-width:620px){
-    .card{width:100%!important;border-radius:0!important}
+    .outer{padding:16px 10px!important}
+    .card{border-radius:16px!important}
     .pad{padding-left:24px!important;padding-right:24px!important}
     .h1{font-size:26px!important}
+  }
+  @media (max-width:360px){
+    .pad{padding-left:20px!important;padding-right:20px!important}
+    .h1{font-size:24px!important}
   }
 </style>
 </head>
 <body style="margin:0;padding:0;background:${FOAM}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:${FOAM}">${preheader}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${FOAM}">
-<tr><td align="center" style="padding:32px 12px">
-  <table role="presentation" class="card" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background:#ffffff;border-radius:20px;overflow:hidden">
+<tr><td class="outer" align="center" style="padding:32px 12px">
+  <!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+  <table role="presentation" class="card" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:20px;overflow:hidden">
     <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:28px 40px 26px">
-      <img src="${LOGO}" width="180" height="26" alt="Upstream Digital" style="display:block;border:0;width:180px;height:auto;color:#ffffff;font:700 20px ${FONT}">
+      <img src="${LOGO}" width="180" height="26" alt="Upstream Digital" style="display:block;border:0;width:180px;max-width:100%;height:auto;color:#ffffff;font:700 20px ${FONT}">
     </td></tr>
     <tr><td bgcolor="${BRAND}" style="height:4px;line-height:4px;font-size:0;background:${BRAND};background-image:linear-gradient(90deg,${NAVY},${BRAND} 55%,${SKY})">&nbsp;</td></tr>
     <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:36px 40px 40px">
@@ -90,7 +99,7 @@ function brandedHtml(name) {
       <p style="margin:0 0 20px;font:400 17px/1.6 ${FONT};color:${NAVY}">If it's time-sensitive, you're welcome to give us a call.</p>
       <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
         <td bgcolor="${BRAND}" style="border-radius:300px;background:${BRAND}">
-          <a href="tel:+18604506983" style="display:inline-block;padding:14px 28px;font:600 16px/1 ${FONT};color:${ABYSS};text-decoration:none;border-radius:300px;white-space:nowrap">Call ${PHONE}</a>
+          <a href="tel:+18604506983" style="display:inline-block;padding:14px 28px;font:600 16px/1.3 ${FONT};color:${ABYSS};text-decoration:none;border-radius:300px">Call <span style="white-space:nowrap">${PHONE}</span></a>
         </td>
       </tr></table>
     </td></tr>
@@ -98,10 +107,11 @@ function brandedHtml(name) {
       <p style="margin:0;font:400 17px/1.6 ${FONT};color:${NAVY}">Talk soon,<br><strong style="font-weight:700">The Upstream Digital team</strong></p>
     </td></tr>
     <tr><td class="pad" bgcolor="${ABYSS}" style="background:${ABYSS};padding:24px 40px">
-      <p style="margin:0 0 6px;font:600 14px/1.5 ${FONT};color:#ffffff">Upstream Digital <span style="color:${SKY};font-weight:400">&nbsp;Greenwich, CT</span></p>
+      <p style="margin:0 0 6px;font:600 14px/1.5 ${FONT};color:#ffffff">Upstream Digital <span style="color:${SKY};font-weight:400;white-space:nowrap">&nbsp;Greenwich, CT</span></p>
       <p style="margin:0;font:400 13px/1.5 ${FONT};color:${SKY}"><a href="https://www.getupstreamdigital.com" style="color:${SKY};text-decoration:underline">getupstreamdigital.com</a></p>
     </td></tr>
   </table>
+  <!--[if mso]></td></tr></table><![endif]-->
   <p style="margin:18px 0 0;font:400 12px/1.5 ${FONT};color:${MUTED}">You're receiving this because you contacted us through our website.</p>
 </td></tr>
 </table>
