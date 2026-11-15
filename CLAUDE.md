@@ -90,7 +90,7 @@ Defined as tokens in the `:root` block at the top of the `<style>` in `site/inde
 
 ## Open items (not yet done)
 
-1. Contact form uses Netlify Forms (`name="contact"`, `data-netlify`, honeypot `bot-field`; JS posts URL-encoded to `/`). It only works on Netlify; each submission is emailed to tyler@getupstreamdigital.com (Netlify > Forms > Form notifications, confirmed). Locally it shows the "didn’t send" message.
+1. Contact form uses Netlify Forms (`name="contact"`, `data-netlify`, honeypot `bot-field`; JS posts URL-encoded to `/`). It only works on Netlify; each submission is emailed to tyler@getupstreamdigital.com (Netlify > Forms > Form notifications, confirmed). Visitors get an automatic thank-you email from `netlify/functions/submission-created.js` (runs on every verified submission; sends through Resend from hello@getupstreamdigital.com, reply-to tyler@; needs `RESEND_API_KEY` in Netlify environment variables; plain text only, no links, greeting uses a sanitized first name). Locally it shows the "didn’t send" message.
 2. Social links are missing. The live site's Instagram, Facebook and LinkedIn icons point at Wix's own accounts. Get Upstream Digital's real profile URLs and add them to the footer.
 3. Hero video is not used in `site/`. The faithful rebuild loads it from a Wix video URL; if the Wix site goes away, that file needs a new home.
 4. Case studies are built for Phibro RenewOil, Spade Security, Olson Floor Supply and the Honorary Consulate of Italy, and all four clients have approved being featured. Keep the Phibro case study high level (the owner's choice): no yearly results, ad spend, cost per lead or customer, or ranking figures. Still to confirm: which search term the consulate ranks #1 for.

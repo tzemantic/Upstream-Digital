@@ -1,8 +1,9 @@
 # Netlify settings: publishes the static site in site/ (no build step).
 [build]
   publish = "site"
+  functions = "netlify/functions"
   # Only publish when the website itself changed (saves deploy credits on notes-only commits)
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- site/ netlify.toml"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- site/ netlify/ netlify.toml"
 
 # Old Wix addresses -> new ones (301 keeps search rankings)
 [[redirects]]
