@@ -253,6 +253,13 @@
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
   });
 
+  /* Analytics: count taps/clicks on the phone number, with where on the page they happened */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="tel:"]');if(!a||!window.gtag)return;
+    var s,where=a.closest('footer')?'footer':a.closest('.bar')?'header':a.closest('aside')?'sidebar':a.closest('.cta-band')?'call_to_action':(s=a.closest('section[id]'))?s.id:'page';
+    gtag('event','phone_call_click',{link_location:where,page_path:location.pathname});
+  });
+
   /* Tell screen reader users when a link opens a new tab */
   [].forEach.call(document.querySelectorAll('a[target="_blank"]'),function(a){
     if(a.querySelector('.visually-hidden'))return;
