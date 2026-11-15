@@ -109,7 +109,7 @@
   });
 
 
-  /* Client logo strip: auto-scrolls, and visitors can drag, swipe or trackpad-scroll it */
+  /* Client logo strip: auto-scrolls, and visitors can drag, swipe or trackpad-scroll it. A plain click opens the client's site; drag mode (which blocks link clicks) only starts after 6px of movement. */
   var mq=document.getElementById('marquee'),strip=mq&&mq.parentElement;
   if(mq&&strip){
     if(!calm){[].slice.call(mq.children).forEach(function(a){var k=a.cloneNode(true);k.setAttribute('aria-hidden','true');k.tabIndex=-1;mq.appendChild(k)})}
@@ -125,10 +125,10 @@
     strip.addEventListener('focusin',function(){pauseFor(4000)});
     strip.addEventListener('pointerdown',function(e){
       if(e.pointerType!=='mouse'||e.button!==0)return;
-      dragging=true;moved=0;startX=e.clientX;startPos=strip.scrollLeft;strip.classList.add('dragging');pauseFor(3000);
+      dragging=true;moved=0;startX=e.clientX;startPos=strip.scrollLeft;pauseFor(3000);
     });
     window.addEventListener('pointermove',function(e){
-      if(!dragging)return;var dx=e.clientX-startX;moved=Math.max(moved,Math.abs(dx));strip.scrollLeft=startPos-dx;
+      if(!dragging)return;var dx=e.clientX-startX;moved=Math.max(moved,Math.abs(dx));if(moved>6)strip.classList.add('dragging');strip.scrollLeft=startPos-dx;
       if(looped){var h=half();if(strip.scrollLeft>=h){startPos-=h;strip.scrollLeft-=h}else if(strip.scrollLeft<1){startPos+=h;strip.scrollLeft+=h}}
       pauseFor(3000);
     });

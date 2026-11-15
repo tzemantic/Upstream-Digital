@@ -11,7 +11,7 @@ SITE = sys.argv[1]
 DOMAIN = "https://www.getupstreamdigital.com"
 OG_IMG = DOMAIN + "/assets/about.webp"
 TODAY = "2026-11-13"
-ASSET_V = "20261115c"  # bump when styles.css or main.js change so browsers fetch fresh copies
+ASSET_V = "20261115d"  # bump when styles.css or main.js change so browsers fetch fresh copies
 
 def esc(s): return html.escape(s, quote=True)
 
