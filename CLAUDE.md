@@ -101,4 +101,4 @@ Defined as tokens in the `:root` block at the top of the `<style>` in `site/inde
 
 ## Deploying
 
-Hosted on Netlify from the private GitHub repo: every push to `main` publishes `site/` automatically (`netlify.toml`: publish dir, 301 redirects from the old Wix URLs, security headers). No build step. Commit and push to publish; the owner wants Claude to publish changes this way. Domain DNS is at GoDaddy; never touch its MX/TXT/autodiscover records (Outlook email).
+Hosted on Netlify from the private GitHub repo: every push to `main` publishes `site/` automatically (`netlify.toml`: publish dir, 301 redirects from the old Wix URLs, security headers). No build step. Netlify project: `willowy-creponne-2fb937` (https://willowy-creponne-2fb937.netlify.app), form detection on. Commit and push to publish; the GitHub CLI is at `~/.local/bin/gh` (signed in as tzemantic); the owner wants Claude to publish changes this way. Domain DNS is at GoDaddy; never touch its MX/TXT/autodiscover records (Outlook email).
